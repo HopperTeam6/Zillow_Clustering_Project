@@ -29,7 +29,7 @@ def calculate_column_nulls(df):
         missing = df[column].isnull().sum()
         
         #assign variable to ratio of rows with null values to overall rows in column
-        ratio = df[column].isnull().sum() / len(df)
+        ratio = missing / len(df)
     
         #assign a dictionary for your dataframe to accept
         r_dict = {'nulls': missing,
@@ -46,7 +46,7 @@ def calculate_column_nulls(df):
     return column_nulls
 
 
-    def calculate_row_nulls(df):
+def calculate_row_nulls(df):
     
     #create an empty list
     output = []
@@ -99,7 +99,7 @@ def handle_nulls(df, cr, rr):
         missing = df[column].isnull().sum()
         
         #assign variable to ratio of rows with null values to overall rows in column
-        ratio = df[column].isnull().sum() / len(df)
+        ratio = missing / len(df)
     
         #assign a dictionary for your dataframe to accept
         r_dict = {'nulls': missing,
