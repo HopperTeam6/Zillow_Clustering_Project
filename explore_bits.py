@@ -4,6 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from scipy.stats import stats
+
 from sklearn.model_selection import train_test_split
 from scipy.stats import pearsonr, spearmanr
 
@@ -50,9 +52,9 @@ def plot_variable_pairs(df, quant_vars):
         #plot relationships between continuous variables
         sns.lmplot(x = quant_vars[0], y = quant_vars[1], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr1, 3)} | P-value: {round(p1, 4)} \n -----------------');
-        sns.lmplot(x = quant_vars[2], y = quant_vars[0], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[0], y = quant_vars[2], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr2, 3)} | P-value: {round(p2, 4)} \n -----------------');
-        sns.lmplot(x = quant_vars[2], y = quant_vars[1], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[1], y = quant_vars[2], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr3, 3)} | P-value: {round(p3, 4)} \n -----------------');
 
 
@@ -125,19 +127,19 @@ def plot_variable_pairs(df, quant_vars):
         plt.title(f'R-value: {round(corr6, 3)} | P-value: {round(p6, 4)} \n -----------------');
 
         #plot VII
-        sns.lmplot(x = quant_vars[4], y = quant_vars[0], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[0], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr7, 3)} | P-value: {round(p7, 4)} \n -----------------');
 
         #plot VIII
-        sns.lmplot(x = quant_vars[4], y = quant_vars[1], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[1], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr8, 3)} | P-value: {round(p8, 4)} \n -----------------');
 
         #plot IX
-        sns.lmplot(x = quant_vars[4], y = quant_vars[2], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[2], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr9, 3)} | P-value: {round(p9, 4)} \n -----------------');
 
         #plot X
-        sns.lmplot(x = quant_vars[4], y = quant_vars[3], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[3], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr10, 3)} | P-value: {round(p10, 4)} \n -----------------');
 
     #pair 6 features
@@ -203,23 +205,23 @@ def plot_variable_pairs(df, quant_vars):
         plt.title(f'R-value: {round(corr10, 3)} | P-value: {round(p10, 4)} \n -----------------');
 
         #plot XI
-        sns.lmplot(x = quant_vars[5], y = quant_vars[0], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[0], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr11, 3)} | P-value: {round(p11, 4)} \n -----------------');
 
         #plot XII
-        sns.lmplot(x = quant_vars[5], y = quant_vars[1], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[1], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr12, 3)} | P-value: {round(p12, 4)} \n -----------------');
 
         #plot XIII
-        sns.lmplot(x = quant_vars[5], y = quant_vars[2], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[2], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr13, 3)} | P-value: {round(p13, 4)} \n -----------------');
 
         #plot XIV
-        sns.lmplot(x = quant_vars[5], y = quant_vars[3], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[3], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr14, 3)} | P-value: {round(p14, 4)} \n -----------------');
 
         #plot XV
-        sns.lmplot(x = quant_vars[5], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[4], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr15, 3)} | P-value: {round(p15, 4)} \n -----------------');
 
 
@@ -313,27 +315,27 @@ def plot_variable_pairs(df, quant_vars):
         plt.title(f'R-value: {round(corr15, 3)} | P-value: {round(p15, 4)} \n -----------------');
 
         #plot XVI
-        sns.lmplot(x = quant_vars[6], y = quant_vars[0], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[0], y = quant_vars[6], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr16, 3)} | P-value: {round(p16, 4)} \n -----------------');
 
         #plot XVII
-        sns.lmplot(x = quant_vars[6], y = quant_vars[1], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[1], y = quant_vars[6], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr17, 3)} | P-value: {round(p17, 4)} \n -----------------');
 
         #plot XVIII
-        sns.lmplot(x = quant_vars[6], y = quant_vars[2], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[2], y = quant_vars[6], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr18, 3)} | P-value: {round(p18, 4)} \n -----------------');
 
         #plot XIX
-        sns.lmplot(x = quant_vars[6], y = quant_vars[3], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[3], y = quant_vars[6], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr19, 3)} | P-value: {round(p19, 4)} \n -----------------');
 
         #plot XX
-        sns.lmplot(x = quant_vars[6], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[4], y = quant_vars[6], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr20, 3)} | P-value: {round(p20, 4)} \n -----------------');
 
         #plot XXI
-        sns.lmplot(x = quant_vars[6], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[5], y = quant_vars[6], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr21, 3)} | P-value: {round(p21, 4)} \n -----------------');
 
 
@@ -443,49 +445,48 @@ def plot_variable_pairs(df, quant_vars):
 
         #plot XVIII
         sns.lmplot(x = quant_vars[6], y = quant_vars[2], data = df, line_kws = {'color': 'purple'})
-        plt.title(f'R-value: {round(corr18, 3)} | P-value: {round(p18, 4)} \n -----------------');
+        plt.title(f'R-value: {round(corr18, 3)} | P-value: {round(p18, 4)} \n -----------------')
 
         #plot XIX
         sns.lmplot(x = quant_vars[6], y = quant_vars[3], data = df, line_kws = {'color': 'purple'})
-        plt.title(f'R-value: {round(corr19, 3)} | P-value: {round(p19, 4)} \n -----------------');
+        plt.title(f'R-value: {round(corr19, 3)} | P-value: {round(p19, 4)} \n -----------------')
 
         #plot XX
         sns.lmplot(x = quant_vars[6], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
-        plt.title(f'R-value: {round(corr20, 3)} | P-value: {round(p20, 4)} \n -----------------');
+        plt.title(f'R-value: {round(corr20, 3)} | P-value: {round(p20, 4)} \n -----------------')
 
         #plot XXI
         sns.lmplot(x = quant_vars[6], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr21, 3)} | P-value: {round(p21, 4)} \n -----------------');
 
         #plot XXII
-        sns.lmplot(x = quant_vars[7], y = quant_vars[0], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[0], y = quant_vars[7], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr22, 3)} | P-value: {round(p22, 4)} \n -----------------');
 
         #plot XXIII
-        sns.lmplot(x = quant_vars[7], y = quant_vars[1], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[1], y = quant_vars[7], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr23, 3)} | P-value: {round(p23, 4)} \n -----------------');
 
         #plot XXIV
-        sns.lmplot(x = quant_vars[7], y = quant_vars[2], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[2], y = quant_vars[7], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr24, 3)} | P-value: {round(p24, 4)} \n -----------------');
 
         #plot XXV
-        sns.lmplot(x = quant_vars[7], y = quant_vars[3], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[3], y = quant_vars[7], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr25, 3)} | P-value: {round(p25, 4)} \n -----------------');
 
         #plot XXVI
-        sns.lmplot(x = quant_vars[7], y = quant_vars[4], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[4], y = quant_vars[7], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr26, 3)} | P-value: {round(p26, 4)} \n -----------------');
 
         #plot XXVII
-        sns.lmplot(x = quant_vars[7], y = quant_vars[5], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[5], y = quant_vars[7], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr27, 3)} | P-value: {round(p27, 4)} \n -----------------');
 
         #plot XXVIII
-        sns.lmplot(x = quant_vars[7], y = quant_vars[6], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[6], y = quant_vars[7], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr28, 3)} | P-value: {round(p28, 4)} \n -----------------');
     
-
 
 #<^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^> CUSTOMIZED RETURNS ON STATS TESTS FOUND HERE <^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^>#
 
@@ -514,63 +515,3 @@ def return_chi2(observed):
     print(f'chi^2 = {chi2:.4f}')
     print(f'p = {p:.4f}')
 
-
-
-### /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ FEATURE SELECTION FUNCTIONS HERE /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ ###
-
-
-
-### Note: must define X_train and y_train prior to running feature selection functions
-## note: also these lists are ordered backward
-
-#X_train = predictors or features (same thing if you got the right features)
-#y_train = target
-#k = number of features you want
-
-#select_kbest defines 3 parameters, X_train (predictors), y_train (target variable) and k (number of features to spit), and returns a list of the best features my man
-def select_kbest(X_train, y_train, k):
-
-    #import feature selection tools
-    from sklearn.feature_selection import SelectKBest, f_regression
-
-    #create the selector
-    f_select = SelectKBest(f_regression, k = k)
-
-    #fit the selector
-    f_select.fit(X_train, y_train)
-
-    #create a boolean mask to show if feature was selected
-    feat_mask = f_select.get_support()
-    
-    #create a list of the best features
-    best_features = X_train.iloc[:,feat_mask].columns.to_list()
-
-    #gimme gimme
-    return best_features
-
-
-
-#rfe defines 3 parameters, X_train (features), y_train (target variable) and k (number of features to bop), and returns a list of the best boppits m8
-def rfe(X_train, y_train, k):
-
-    #import feature selection tools
-    from sklearn.feature_selection import RFE
-    from sklearn.linear_model import LinearRegression
-
-    #crank it
-    lm = LinearRegression()
-
-    #pop it
-    rfe = RFE(lm, k)
-    
-    #bop it
-    rfe.fit(X_train, y_train)  
-    
-    #twist it
-    feat_mask = rfe.support_
-    
-    #pull it 
-    best_rfe = X_train.iloc[:,feat_mask].columns.tolist()
-    
-    #bop it
-    return best_rfe
