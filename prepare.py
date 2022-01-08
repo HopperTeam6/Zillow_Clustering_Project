@@ -5,8 +5,23 @@ import numpy as np
 
 
 
+def filter_zillow(df):
+    """
+    Function removes propeties that have no bedrooms and no bathrooms and too small of an area
+    """
+    # remove propeties that have no bedrooms and no bathrooms and too small of an area
+    df = df[(df.bedroomcnt > 0) & (df.bathroomcnt > 0) & (df.unitcnt <= 1) | df.unitcnt.isna() & (df.calculatedfinishedsquarefeet > 500) & (df.bedroomcnt > 0) & (df.bathroomcnt > 0)]
+
+    return df
+
 
 def handle_nulls(df, percent_required_cols = .5, percent_required_rows = .7):
+    """
+    - Drops column if it has more than 50% nulls. Drops row it has more than 30% nulls.
+    - Drops columsn either no longer needed, not useful, or duplicate.
+    - Replaced heating system description with None
+    - Drops all other nulls
+    """
     
     # set threshold for min of values in columns for dropping
     thresh_col = int(round(percent_required_cols * df.shape[0]))
@@ -73,8 +88,10 @@ def handle_nulls(df, percent_required_cols = .5, percent_required_rows = .7):
 
 
 def remove_outliers(df):
-    
-    # List of columns
+    """
+    Function drops outliers that are above and below first and third quartile by 1.5 times the interquartile range
+    """
+    # List of columns to filter outliers
     cols = [col for col in df.columns.drop(['bedroomcnt',
                                             'fips',
                                             'propertycountylandusecode',
@@ -82,15 +99,17 @@ def remove_outliers(df):
                                            ])]
 
     for col in cols:
-        q1, q3 = df[col].quantile([.25, .75])  # get quartiles
+        # get 1st and 3rd quartile
+        q1, q3 = df[col].quantile([.25, .75])
+        
+        # set Interquartile Range
+        iqr = q3 - q1
 
-        iqr = q3 - q1   # calculate interquartile range
-
+        # Set upper and lower bounderies
         upper_bound = q3 + 1.5 * iqr   # get upper bound
         lower_bound = q1 - 1.5 * iqr   # get lower bound
 
         # return dataframe without outliers
-
         df = df[(df[col] > lower_bound) & (df[col] < upper_bound)]
         
         return df
@@ -99,7 +118,10 @@ def remove_outliers(df):
     
     
 def fix_cols(df):
-
+    """
+    Function renames columns for readability and creates new columns for dimension reduction
+    """
+    
     # rename for readability
     df = df.rename(columns = {'bathroomcnt':'bathrooms',
      'bedroomcnt':'bedrooms',
@@ -153,11 +175,15 @@ def fix_cols(df):
 
 
 def split(df):
+    """
+    Function splits data into 3 sets: train, vaidate, and test
+    """
     from sklearn.model_selection import train_test_split
     
     # crerte tain, validate, test data sets
     train_validate, test = train_test_split(df, test_size=.2, random_state=123)
     train, validate = train_test_split(train_validate, test_size=.3, random_state=123)
+    
     return train, validate, test
 
 
@@ -166,7 +192,9 @@ def split(df):
 
 
 def scale_cols(train, validate, test):
-    
+    """
+    Function creates datafram of columns used to scale for clustering and modeling
+    """
     # Scaler
     from sklearn.preprocessing import MinMaxScaler
     
@@ -198,6 +226,35 @@ def scale_cols(train, validate, test):
     test_scaled = pd.DataFrame(test_scaled, columns=test_cols.columns, index=test_cols.index)
     
     return train_scaled, validate_scaled, test_scaled
+
+
+
+def wrangle(df):
+    """
+    Function merges all prepare functions into one
+    """
+    # removes propeties that have no bedrooms and no bathrooms and too small of an area
+    df = filter_zillow(df)
+    
+    # removes columns and rows that meet null percent values
+    df = handle_nulls(df, percent_required_cols = .5, percent_required_rows = .7)
+    
+    # remove outliers that 1.5 times IQR above or below first or third quartile
+    df = remove_outliers(df)
+    
+    # Renames columns and add columns for dimension reduction
+    df = fix_cols(df)
+    
+    # split data for train, validate, test
+    train, validate, test = split(df)
+    
+    #scale train, valiate, test
+    train_scaled, validate_scaled, test_scaled = scale_cols(train, validate, test)
+    
+    return df, train, validate, test, train_scaled, validate_scaled, test_scaled
+    
+    
+    
 
 
 

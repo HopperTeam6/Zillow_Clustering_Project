@@ -7,6 +7,9 @@ import numpy as np
 
 
 def get_zillow():
+    """
+    Function imports MySQL Sever credential to pull Zillow data and creates a csv file if needed.
+    """
     # import env file for hostname, username, password, and db_name
     from env import host, user, password, db_name
 
@@ -51,6 +54,9 @@ def get_zillow():
 
 
 def col_nulls(df):
+    """
+    Function creates a dataframe that shows null count, mean, and percent of each column
+    """
     # create dataframe that has column name as first column
     col_nulls = pd.DataFrame()
     col_nulls['columns_name'] = df.isna().sum().index
@@ -76,6 +82,9 @@ def col_nulls(df):
 
 
 def row_nulls(df):
+    """
+    Function creates a dataframe that shows row null count and percnet"
+    """
     # Create df with number of rows with a specific number of null columns
     row_nulls = pd.DataFrame(df.isna().sum(axis=1).value_counts(), columns=['num_rows_with_n_null_cols'])
 
@@ -92,3 +101,7 @@ def row_nulls(df):
     row_nulls = row_nulls.sort_values(by=['percent_null_cols'], ascending=False)
     
     return row_nulls
+    
+    
+    
+    
