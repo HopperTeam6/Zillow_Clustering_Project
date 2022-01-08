@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from scipy.stats import stats
+from scipy import stats
 
 from sklearn.model_selection import train_test_split
 from scipy.stats import pearsonr, spearmanr
@@ -37,7 +37,7 @@ def plot_variable_pairs(df, quant_vars):
         corr1, p1 = stats.pearsonr(df[quant_vars[1]], df[quant_vars[0]])
 
         #plot relationships between continuous variables
-        sns.lmplot(x = quant_vars[0], y = quant_vars[1], data = df, line_kws = {'color': 'purple'})
+        sns.lmplot(x = quant_vars[1], y = quant_vars[0], data = df, line_kws = {'color': 'purple'})
         plt.title(f'R-value: {round(corr1, 3)} | P-value: {round(p1, 4)} \n -----------------');
 
 

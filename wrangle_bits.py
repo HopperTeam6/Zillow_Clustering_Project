@@ -198,7 +198,7 @@ def remove_outliers(df, k, col_list):
 
 
 #reference for splitting data in a classification setting
-def split_data(df, target):
+def class_split_data(df, target):
     '''
     Takes in a dataset and returns the train, validate, and test subset dataframes.
     Dataframe size for my test set is .2 or 20% of the original data. 
@@ -213,6 +213,28 @@ def split_data(df, target):
     
     #get my validate set from the training set, stratify target variable again
     train, validate = train_test_split(train, test_size = .3, random_state = 421, stratify = train[target])
+    
+    #return the 3 dataframes
+    return train, validate, test
+
+
+
+#split data in regression setting
+def split_data(df):
+    '''
+    Takes in a dataset and returns the train, validate, and test subset dataframes.
+    Dataframe size for my test set is .2 or 20% of the original data. 
+    Validate data is 30% of my training set, which is 24% of the original data. 
+    Training data is 56% of the original data.
+    '''
+    #import splitter
+    from sklearn.model_selection import train_test_split
+    
+    #get my training and test data sets defined
+    train, test = train_test_split(df, test_size = .2, random_state = 421)
+    
+    #get my validate set from the training set
+    train, validate = train_test_split(train, test_size = .3, random_state = 421)
     
     #return the 3 dataframes
     return train, validate, test
