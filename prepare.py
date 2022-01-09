@@ -112,7 +112,7 @@ def remove_outliers(df):
         # return dataframe without outliers
         df = df[(df[col] > lower_bound) & (df[col] < upper_bound)]
         
-        return df
+    return df
     
     
     
