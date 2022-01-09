@@ -10,8 +10,10 @@ def get_zillow():
     """
     Function imports MySQL Sever credential to pull Zillow data and creates a csv file if needed.
     """
-    # import env file for hostname, username, password, and db_name
-    from env import host, user, password, db_name
+    # import env file for hostname, username, password
+    from env import host, user, password
+
+    db_name = 'zillow'
 
     # Pass env file authentication to container 'url'
     url = f'mysql+pymysql://{user}:{password}@{host}/{db_name}'
@@ -44,7 +46,7 @@ def get_zillow():
     if os.path.isfile(file):
         df = pd.read_csv(file, index_col=0)
     else:
-        df = pd.read_sql(sql,url)
+        df = pd.read_sql(sql, url)
         df.to_csv(file)
     return df
 
