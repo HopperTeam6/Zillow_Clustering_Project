@@ -2,6 +2,9 @@
 import pandas as pd
 import numpy as np
 
+# cluster method
+from sklearn.cluster import KMeans
+
 
 
 def elbow_method(train_scaled):
@@ -30,11 +33,13 @@ def tt_test_1samp(train, n_clusters=5):
     return t, p
 
 
-def cluster_combo_1(train_scaled):
+def cluster_combo_1(train, validate, test, train_scaled, validate_scaled, test_scaled):
     
     # Filter columns from train scaled
-    cols = ['house_dollar_sqft', 'age']
+    cols = ['age', 'house_area', ]
     train_scaled_X = train_scaled[cols]
+    validate_scaled_X = validate_scaled[cols]
+    test_scaled_X = test_scaled[cols]
 
 
     # Move forward with k=6
@@ -43,15 +48,19 @@ def cluster_combo_1(train_scaled):
 
     # And assign the cluster number to a column on the dataframe
     train["cluster"] = kmeans.predict(train_scaled_X)
+    validate["cluster"] = kmeans.predict(validate_scaled_X)
+    test["cluster"] = kmeans.predict(test_scaled_X)
     
-    return train
+    return train, validate, test
 
 
 
-def cluster_combo_2(train_scaled):
+def cluster_combo_2(train, validate, test, train_scaled, validate_scaled, test_scaled):
     # Filter columsn from train scaled
-    cols = ['house_dollar_sqft', 'land_dollar_sqft']
+    cols = ['age', 'land_dollar_sqft']
     train_scaled_X = train_scaled[cols]
+    validate_scaled_X = validate_scaled[cols]
+    test_scaled_X = test_scaled[cols]
 
     # Move forward with k=6
     kmeans = KMeans(n_clusters = 6, random_state=123)
@@ -59,31 +68,38 @@ def cluster_combo_2(train_scaled):
 
     # And assign the cluster number to a column on the dataframe
     train["cluster"] = kmeans.predict(train_scaled_X)
+    validate["cluster"] = kmeans.predict(validate_scaled_X)
+    test["cluster"] = kmeans.predict(test_scaled_X)
     
-    return train
+    return train, validate, test
 
 
-def cluster_combo_3(train_scaled):
+def cluster_combo_3(train, validate, test, train_scaled, validate_scaled, test_scaled):
     
     # Filter columsn from train scaled
-    cols = ['land_dollar_sqft', 'age']
+    cols = ['age', 'bed_bath_ratio']
     train_scaled_X = train_scaled[cols]
+    validate_scaled_X = validate_scaled[cols]
+    test_scaled_X = test_scaled[cols]
 
-    # Move forward with k=3
+    # Move forward with k=6
     kmeans = KMeans(n_clusters = 6, random_state=123)
     kmeans.fit(train_scaled_X)
 
     # And assign the cluster number to a column on the dataframe
     train["cluster"] = kmeans.predict(train_scaled_X)
+    validate["cluster"] = kmeans.predict(validate_scaled_X)
+    test["cluster"] = kmeans.predict(test_scaled_X)
     
-    return train
+    return train, validate, test
 
 
-def cluster_combo_4(train_scaled):
+def cluster_combo_4(train, validate, test, train_scaled, validate_scaled, test_scaled):
     # Filter columsn from train scaled
     cols = ['longitude', 'latitude']
     train_scaled_X = train_scaled[cols]
-    train_scaled_X.head()
+    validate_scaled_X = validate_scaled[cols]
+    test_scaled_X = test_scaled[cols]
 
     # Move forward with k=5
     kmeans = KMeans(n_clusters = 5, random_state=123)
@@ -91,10 +107,42 @@ def cluster_combo_4(train_scaled):
 
     # And assign the cluster number to a column on the dataframe
     train["cluster"] = kmeans.predict(train_scaled_X)
+    validate["cluster"] = kmeans.predict(validate_scaled_X)
+    test["cluster"] = kmeans.predict(test_scaled_X)
     
-    return train
+    return train, validate, test
 
 
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 

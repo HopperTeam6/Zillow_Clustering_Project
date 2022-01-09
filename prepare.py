@@ -202,7 +202,7 @@ def scale_cols(train, validate, test):
     cols = ['house_area', 'lot_area', 'tax_value_house', 'tax_value_total',
            'tax_value_land', 'age',
            'logerror_abs','house_dollar_sqft', 'land_dollar_sqft',
-           'tax_rate', 'bed_bath_ratio', 'fips']
+           'tax_rate', 'bed_bath_ratio', 'fips', 'longitude','latitude']
 
     # Columns used for further exploration and clustering
     train_cols = train[cols]
