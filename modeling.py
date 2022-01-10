@@ -34,7 +34,7 @@ def create_dummies(train, validate, test):
 
 def X_y_versions(train, validate, test, target='logerror_abs'):
     # select columns to model
-    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'longitude','latitude','tax_rate','bed_bath_ratio', 'cluster_1','cluster_2','logerror_abs']
+    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'longitude','latitude','tax_rate','bed_bath_ratio', 'cluster_1', 'cluster_2', 'cluster_3', 'cluster_4', 'cluster_5','logerror_abs']
     
     # create X & y version of train, validate, test with y the target and X are the features. 
     X_train = train[cols].drop(columns=[target])
@@ -162,7 +162,7 @@ def model_baseline(y_train, y_validate):
 def model_ols_wo_cluster(train, validate, test, y_train, y_validate, metric_df):
     
     # select columns to model without cluster columns
-    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'bed_bath_ratio','logerror_abs']
+    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'bed_bath_ratio', 'logerror_abs']
 
     # establish target column
     target = 'logerror_abs'
@@ -225,7 +225,7 @@ def model_ols_wo_cluster(train, validate, test, y_train, y_validate, metric_df):
 def model_osl_w_cluster(train, validate, test, y_train, y_validate, metric_df):
     
     # select columns to model including cluster columns
-    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'bed_bath_ratio','logerror_abs', 'cluster_1', 'cluster_2']
+    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'bed_bath_ratio','logerror_abs', 'cluster_1', 'cluster_5']
 
     # establish target column
     target = 'logerror_abs'
@@ -288,8 +288,7 @@ def model_osl_w_cluster(train, validate, test, y_train, y_validate, metric_df):
 def model_osl_w_cluster_more_features(train, validate, test, y_train, y_validate, metric_df):
     
     # select columns to model including cluster columns
-    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'bed_bath_ratio','logerror_abs', 'cluster_1', 'cluster_2', 'longitude',
-           'latitude','tax_rate']
+    cols = ['land_dollar_sqft','house_dollar_sqft', 'age', 'bed_bath_ratio','logerror_abs', 'cluster_1', 'cluster_5', 'longitude', 'latitude','tax_rate']
 
     # establish target column
     target = 'logerror_abs'
