@@ -36,7 +36,7 @@ def tt_test_1samp(train, n_clusters=5):
 def cluster_combo_1(train, validate, test, train_scaled, validate_scaled, test_scaled):
     
     # Filter columns from train scaled
-    cols = ['age', 'house_area', ]
+    cols = ['age', 'house_area']
     train_scaled_X = train_scaled[cols]
     validate_scaled_X = validate_scaled[cols]
     test_scaled_X = test_scaled[cols]
