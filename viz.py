@@ -72,8 +72,8 @@ def plot_residuals(y_validate):
     plt.scatter(y_validate.logerror_abs, y_validate.pr_pred - y_validate.logerror_abs, 
                 alpha=.5, color="green", s=10, label="Model 4: Poly Regressor with Cluster and More Features")
     plt.legend()
-    plt.xlabel("Actual Tax Value")
-    plt.ylabel("Residual/Error: Predicted Tax Value - ABS LogError Values")
+    plt.xlabel("ABS LogError Values")
+    plt.ylabel("Residual/Error: Predicted ABS LogError Values - Actual ABS LogError Values")
     # plt.title("Do the size of errors change as the actual value changes?")
     # plt.annotate("The polynomial model appears to overreact to noise", (2.0, -10))
     # plt.annotate("The OLS model (LinearRegression)\n appears to be most consistent", (15.5, 3))
